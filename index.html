@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <title>Bonfire world — Minecraft-івенти</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#6563EE" />
+  <meta name="description" content="Bonfire world — приватні івенти у Minecraft: Java Edition з грошовими призами. Участь безкоштовна, потрібна ліцензія.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bonfire world">
+  <meta property="og:title" content="Bonfire world — Minecraft-івенти">
+  <meta property="og:description" content="Регулярні івенти в Minecraft з грошовими призами. Приєднуйся через Discord.">
+  <meta property="og:url" content="https://bonfireworld.com">
+  <meta property="og:image" content="https://bonfireworld.com/img/bonfire-og.png">
+
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #111827;
+      --card: #0f172a;
+      --border: #4b5563;
+      --accent: #f97316;
+      --accent-soft: #fed7aa;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --shadow-lg: 0 22px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER (похож на пример) */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.8), transparent);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 12px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 30% 20%, #facc15 0, #f97316 25%, #7c2d12 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(248, 171, 36, 0.7);
+    }
+
+    .logo-mark span {
+      width: 60%;
+      height: 60%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 0, #fef3c7 0, #fb923c 45%, transparent 100%);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #e5e7eb;
+      opacity: 0.7;
+      transition: background 0.12s ease-out, opacity 0.12s ease-out;
+    }
+
+    .nav-link:hover {
+      background: rgba(31, 41, 55, 0.95);
+      opacity: 1;
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(to top, #f97316, #facc15);
+      color: #111827;
+      font-weight: 600;
+      box-shadow: 0 18px 40px rgba(248, 171, 36, 0.6);
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    /* HERO (близко к структуре spworlds: текст слева, картинка справа) */
+
+    .hero {
+      position: relative;
+      padding: 32px 0 40px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.55), #020617 70%),
+        url("/img/hero-bg.jpg"); /* ЗАМІНИ НА СВОЮ КАРТИНКУ */
+      background-position: center;
+      background-size: cover;
+      opacity: 0.7;
+      filter: saturate(1.1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.35), transparent 55%),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      mix-blend-mode: multiply;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      min-height: 28rem;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-inner {
+        min-height: 36rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 12px 0;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .hero-tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: linear-gradient(to top, #f97316, #facc15);
+      color: #111827;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 18px 40px rgba(248, 171, 36, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary span.icon {
+      font-size: 18px;
+    }
+
+    .btn-secondary {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(156, 163, 175, 0.8);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text);
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      cursor: default;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-note strong {
+      color: var(--accent-soft);
+    }
+
+    /* HERO RIGHT BLOCK */
+
+    .hero-right-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero-card {
+      position: relative;
+      width: min(420px, 100%);
+      border-radius: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .hero-card-img-wrap {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: #020617;
+      aspect-ratio: 16 / 10;
+    }
+
+    .hero-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-card-badge {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 250, 252, 0.15);
+      font-size: 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-body {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .hero-card-title {
+      font-weight: 600;
+    }
+
+    .hero-card-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-card-tag {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.06);
+      border: 1px solid rgba(156, 163, 175, 0.8);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-right-wrap {
+        justify-content: center;
+      }
+      .hero-card {
+        border-radius: 28px;
+      }
+    }
+
+    /* SECTIONS */
+
+    section.block {
+      padding: 24px 0 32px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 380px;
+    }
+
+    @media (max-width: 768px) {
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* NEWS SCROLLER (анонси) */
+
+    .news-scroller {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .news-scroller::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .news-scroller::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+    }
+
+    .news-scroller::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.85);
+      border-radius: 999px;
+    }
+
+    .news-card {
+      min-width: 260px;
+      max-width: 310px;
+      scroll-snap-align: start;
+      border-radius: var(--radius-xl);
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-img-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #020617;
+    }
+
+    .news-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-status {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.08);
+      border: 1px solid rgba(248, 250, 252, 0.32);
+      font-size: 11px;
+      color: var(--accent-soft);
+      backdrop-filter: blur(4px);
+    }
+
+    .news-body {
+      padding: 10px 12px 12px;
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .news-title {
+      font-weight: 600;
+    }
+
+    .news-date {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .news-text {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .news-link {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--accent-soft);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* HOW (3 коротких кроки) */
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .how-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .how-card {
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .how-step {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+    }
+
+    .how-title {
+      font-weight: 600;
+    }
+
+    .how-text {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .licence-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .licence-note strong {
+      color: var(--accent-soft);
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 16px 0 20px;
+      border-top: 1px solid #111827;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .footer-domain {
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-wrap">
+          <a href="#">
+            <div class="logo-mark">
+              <span aria-hidden="true"></span>
+            </div>
+          </a>
+          <div>
+            <div class="logo-text-main">Bonfire world</div>
+            <div class="logo-text-sub">minecraft-івенти</div>
+          </div>
+        </div>
+        <nav class="header-nav">
+          <a class="nav-link" href="#news">Івенти</a>
+          <a class="nav-link" href="#how">Як грати</a>
+          <a class="nav-cta" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
+            Увійти в Discord
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1 class="hero-title">
+            Унікальні <span>Minecraft-івенти</span><br>з грошовим призом
+          </h1>
+          <p class="hero-sub">
+            Bonfire world — приватні івенти у Minecraft: Java Edition. Мінімум тексту, максимум двіжу.
+          </p>
+
+          <div class="hero-tags">
+            <div class="hero-tag">🔥 Регулярні івенти</div>
+            <div class="hero-tag">🆓 Участь безкоштовна</div>
+            <div class="hero-tag">💸 Приз переможцю</div>
+            <div class="hero-tag">🧾 Потрібна ліцензія Minecraft: Java</div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
+              <span class="icon">▶</span>
+              <span>Приєднатися в Discord</span>
+            </a>
+            <div class="btn-secondary">
+              IP сервера та версія гри — тільки в Discord
+            </div>
+          </div>
+
+          <div class="hero-note">
+            <strong>Важливо:</strong> слот на івент бронюється тільки через Discord. Хто не встиг — дивиться хайлайти.
+          </div>
+        </div>
+
+        <div class="hero-right-wrap">
+          <div class="hero-card">
+            <div class="hero-card-img-wrap">
+              <img src="/img/hero-event.jpg" alt="Гравці біля вогнища на івенті Bonfire world у Minecraft">
+              <div class="hero-card-badge">
+                🔥 Найближчий івент
+              </div>
+            </div>
+            <div class="hero-card-body">
+              <div>
+                <div class="hero-card-title">«Назва сценарію»</div>
+                <div class="hero-card-meta">
+                  Дата: уточнюється в Discord<br>
+                  Формат: командне виживання / фракції
+                </div>
+              </div>
+              <div class="hero-card-tag">
+                Набір відкрито в Discord
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS / EVENTS -->
+    <section id="news" class="block">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">Анонси івентів Bonfire world</div>
+          <div class="section-sub">
+            Пролистай картки, вибери івент, залети в Discord — і все, ти в ділі.
+          </div>
+        </div>
+
+        <div class="news-scroller">
+          <!-- card 1 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="/img/news-next.jpg" alt="Локація найближчого івенту Bonfire world">
+              <div class="news-status">Набір відкрито</div>
+            </div>
+            <div class="news-body">
+              <div class="news-title">Найближчий івент «Назва сценарію»</div>
+              <div class="news-date">Дата: уточнюється в Discord</div>
+              <div class="news-text">
+                Командний режим: бази, рейди, фінальний бій за точку.
+              </div>
+              <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
+                Деталі та реєстрація →
+              </a>
+            </div>
+          </article>
+
+          <!-- card 2 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="/img/news-soon.jpg" alt="Тизер майбутнього івенту Bonfire world">
+              <div class="news-status">Скоро</div>
+            </div>
+            <div class="news-body">
+              <div class="news-title">Івент наступного місяця</div>
+              <div class="news-date">Орієнтовно: наступний місяць</div>
+              <div class="news-text">
+                Новий сценарій і свій призовий фонд. Анонс першим з’явиться в Discord.
+              </div>
+              <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
+                Підписатися на анонси →
+              </a>
+            </div>
+          </article>
+
+          <!-- card 3 -->
+          <article class="news-card">
+            <div class="news-img-wrap">
+              <img src="/img/news-archive.jpg" alt="Скрін з минулого івенту Bonfire world">
+              <div class="news-status">Завершено</div>
+            </div>
+            <div class="news-body">
+              <div class="news-title">Попередній івент Bonfire world</div>
+              <div class="news-date">Підсумки: у каналі з репортами</div>
+              <div class="news-text">
+                Нікнейми переможців, скріни баз та головні моменти.
+              </div>
+              <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
+                Подивитися архів →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW-TO (коротко, как у "как играть") -->
+    <section id="how" class="block">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">Як потрапити на івент?</div>
+          <div class="section-sub">
+            Все просто: 3 кроки, без довгих гайдів.
+          </div>
+        </div>
+
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="how-step">крок 1</div>
+            <div class="how-title">Зайди в Discord</div>
+            <div class="how-text">
+              Натисни кнопку «Увійти в Discord» зверху та приєднайся до Bonfire world.
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-step">крок 2</div>
+            <div class="how-title">Обери івент</div>
+            <div class="how-text">
+              У каналі з анонсами знайди потрібний івент, прочитай правила, займи слот.
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-step">крок 3</div>
+            <div class="how-title">Заходь у день старту</div>
+            <div class="how-text">
+              Отримай IP, версію клієнта та час старту — і заходь разом з усіма.
+            </div>
+          </div>
+        </div>
+
+        <div class="licence-note">
+          <strong>Нагадування:</strong> потрібен ліцензійний <strong>Minecraft: Java Edition</strong>. Піратки не допускаються.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2025 <span class="footer-domain">bonfireworld.com</span> • Bonfire world</div>
+      <div>Фанатський проєкт. Не пов’язаний з Mojang AB / Microsoft.</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
