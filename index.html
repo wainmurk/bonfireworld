@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Bonfire world — Minecraft-івенти</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#6563EE" />
+  <meta name="theme-color" content="#ff9d45" />
   <meta name="description" content="Bonfire world — приватні івенти у Minecraft: Java Edition з грошовими призами. Участь безкоштовна, потрібна ліцензія.">
 
   <meta property="og:type" content="website">
@@ -22,12 +22,15 @@
 
   <style>
     :root {
-      --bg: #020617;
-      --bg-soft: #111827;
-      --card: #0f172a;
-      --border: #4b5563;
-      --accent: #f97316;
-      --accent-soft: #fed7aa;
+      /* Палiтра з піксельного вогнища */
+      --bg: #050816;           /* темний нічний фон */
+      --bg-soft: #0b1020;
+      --card: #0e1726;         /* трохи світліше для карток */
+      --border: #253153;       /* холодний синьо-фіолетовий контур */
+      --accent: #ff9d45;       /* основний колір полум’я */
+      --accent-soft: #ffce73;  /* м’які жовто-помаранчеві */
+      --accent-glow: rgba(255, 157, 69, 0.4);
+      --green-soft: #2f7d4b;   /* трава під вогнищем */
       --text: #f9fafb;
       --muted: #9ca3af;
       --radius-xl: 24px;
@@ -45,7 +48,8 @@
     body {
       min-height: 100vh;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      background:
+        radial-gradient(circle at top, #111827 0, #050816 55%, #000 100%);
       color: var(--text);
     }
 
@@ -72,15 +76,20 @@
       padding: 0 16px;
     }
 
-    /* HEADER (похож на пример) */
+    /* HEADER */
 
     header {
       position: sticky;
       top: 0;
       z-index: 20;
       backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.8), transparent);
-      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 22, 0.98),
+        rgba(5, 8, 22, 0.88),
+        transparent
+      );
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
     }
 
     .header-inner {
@@ -101,23 +110,28 @@
       width: 40px;
       height: 40px;
       border-radius: 16px;
-      background: radial-gradient(circle at 30% 20%, #facc15 0, #f97316 25%, #7c2d12 70%);
+      background: #050816;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 24px rgba(248, 171, 36, 0.7);
+      box-shadow: 0 0 30px var(--accent-glow);
+      overflow: hidden;
     }
 
-    .logo-mark span {
-      width: 60%;
-      height: 60%;
-      border-radius: 999px;
-      background: radial-gradient(circle at 50% 0, #fef3c7 0, #fb923c 45%, transparent 100%);
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated; /* підкреслюємо піксель-арт */
     }
 
     .logo-text-main {
       font-weight: 700;
       font-size: 20px;
+    }
+
+    .logo-text-main span {
+      color: var(--accent);
     }
 
     .logo-text-sub {
@@ -143,17 +157,17 @@
     }
 
     .nav-link:hover {
-      background: rgba(31, 41, 55, 0.95);
+      background: rgba(22, 30, 55, 0.95);
       opacity: 1;
     }
 
     .nav-cta {
       padding: 8px 14px;
       border-radius: 999px;
-      background: linear-gradient(to top, #f97316, #facc15);
+      background: radial-gradient(circle at 30% 0, #ffe08a, var(--accent));
       color: #111827;
       font-weight: 600;
-      box-shadow: 0 18px 40px rgba(248, 171, 36, 0.6);
+      box-shadow: 0 18px 40px var(--accent-glow);
       border: none;
       cursor: pointer;
       white-space: nowrap;
@@ -170,7 +184,7 @@
       }
     }
 
-    /* HERO (близко к структуре spworlds: текст слева, картинка справа) */
+    /* HERO */
 
     .hero {
       position: relative;
@@ -181,21 +195,22 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.55), #020617 70%),
-        url("/img/hero-bg.jpg"); /* ЗАМІНИ НА СВОЮ КАРТИНКУ */
+        radial-gradient(circle at 50% 120%, rgba(47, 125, 75, 0.3), transparent 55%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #050816 70%),
+        url("/img/hero-bg.jpg");
       background-position: center;
       background-size: cover;
       opacity: 0.7;
-      filter: saturate(1.1);
+      filter: saturate(1.15);
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.35), transparent 55%),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
-      mix-blend-mode: multiply;
+        radial-gradient(circle at 0 0, rgba(255, 157, 69, 0.32), transparent 60%),
+        linear-gradient(to bottom, rgba(5, 8, 22, 0.96), rgba(5, 8, 22, 0.98));
+      mix-blend-mode: soft-light;
     }
 
     .hero-inner {
@@ -252,8 +267,8 @@
     .hero-tag {
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(12, 19, 38, 0.9);
+      border: 1px solid rgba(37, 49, 83, 0.9);
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -269,13 +284,13 @@
     .btn-primary {
       padding: 10px 20px;
       border-radius: 999px;
-      background: linear-gradient(to top, #f97316, #facc15);
+      background: radial-gradient(circle at 30% 0, #ffe08a, var(--accent));
       color: #111827;
       font-weight: 600;
       border: none;
       cursor: pointer;
       font-size: 15px;
-      box-shadow: 0 18px 40px rgba(248, 171, 36, 0.7);
+      box-shadow: 0 18px 40px var(--accent-glow);
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -288,8 +303,8 @@
     .btn-secondary {
       padding: 10px 16px;
       border-radius: 999px;
-      border: 2px solid rgba(156, 163, 175, 0.8);
-      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      background: rgba(10, 16, 35, 0.95);
       color: var(--text);
       font-size: 14px;
       display: inline-flex;
@@ -308,7 +323,7 @@
       color: var(--accent-soft);
     }
 
-    /* HERO RIGHT BLOCK */
+    /* HERO RIGHT */
 
     .hero-right-wrap {
       display: flex;
@@ -330,8 +345,8 @@
       position: relative;
       border-radius: 32px;
       overflow: hidden;
-      border: 1px solid rgba(75, 85, 99, 0.9);
-      background: #020617;
+      border: 1px solid rgba(37, 49, 83, 0.95);
+      background: #050816;
       aspect-ratio: 16 / 10;
     }
 
@@ -347,10 +362,10 @@
       top: 10px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(5, 8, 22, 0.9);
       border: 1px solid rgba(248, 250, 252, 0.15);
       font-size: 11px;
-      color: var(--muted);
+      color: var(--accent-soft);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -377,10 +392,11 @@
     .hero-card-tag {
       padding: 5px 10px;
       border-radius: 999px;
-      background: rgba(248, 250, 252, 0.06);
-      border: 1px solid rgba(156, 163, 175, 0.8);
+      background: rgba(255, 157, 69, 0.08);
+      border: 1px solid rgba(255, 206, 115, 0.7);
       font-size: 11px;
       white-space: nowrap;
+      color: var(--accent-soft);
     }
 
     @media (max-width: 900px) {
@@ -424,7 +440,7 @@
       }
     }
 
-    /* NEWS SCROLLER (анонси) */
+    /* NEWS */
 
     .news-scroller {
       display: flex;
@@ -439,12 +455,12 @@
     }
 
     .news-scroller::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(7, 12, 32, 0.96);
       border-radius: 999px;
     }
 
     .news-scroller::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.85);
+      background: rgba(148, 163, 184, 0.9);
       border-radius: 999px;
     }
 
@@ -464,7 +480,7 @@
     .news-img-wrap {
       position: relative;
       aspect-ratio: 16 / 9;
-      background: #020617;
+      background: #050816;
     }
 
     .news-img-wrap img {
@@ -479,8 +495,8 @@
       top: 10px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(248, 250, 252, 0.08);
-      border: 1px solid rgba(248, 250, 252, 0.32);
+      background: rgba(5, 8, 22, 0.8);
+      border: 1px solid rgba(255, 206, 115, 0.7);
       font-size: 11px;
       color: var(--accent-soft);
       backdrop-filter: blur(4px);
@@ -516,7 +532,7 @@
       text-underline-offset: 3px;
     }
 
-    /* HOW (3 коротких кроки) */
+    /* HOW */
 
     .how-grid {
       display: grid;
@@ -570,7 +586,7 @@
 
     footer {
       padding: 16px 0 20px;
-      border-top: 1px solid #111827;
+      border-top: 1px solid #0b1020;
       font-size: 11px;
       color: var(--muted);
       margin-top: 12px;
@@ -597,11 +613,12 @@
         <div class="logo-wrap">
           <a href="#">
             <div class="logo-mark">
-              <span aria-hidden="true"></span>
+              <!-- збережи піксель-арт як /img/logo-bonfire.png -->
+              <img src="/img/logo-bonfire.png" alt="Логотип Bonfire world">
             </div>
           </a>
           <div>
-            <div class="logo-text-main">Bonfire world</div>
+            <div class="logo-text-main"><span>Bonfire</span> world</div>
             <div class="logo-text-sub">minecraft-івенти</div>
           </div>
         </div>
@@ -628,14 +645,14 @@
             Унікальні <span>Minecraft-івенти</span><br>з грошовим призом
           </h1>
           <p class="hero-sub">
-            Bonfire world — приватні івенти у Minecraft: Java Edition. Мінімум тексту, максимум двіжу.
+            Bonfire world — приватні івенти у Minecraft: Java Edition. Атмосфера біля вогнища, а не в меню донату.
           </p>
 
           <div class="hero-tags">
             <div class="hero-tag">🔥 Регулярні івенти</div>
             <div class="hero-tag">🆓 Участь безкоштовна</div>
             <div class="hero-tag">💸 Приз переможцю</div>
-            <div class="hero-tag">🧾 Потрібна ліцензія Minecraft: Java</div>
+            <div class="hero-tag">🧾 Ліцензія Minecraft: Java</div>
           </div>
 
           <div class="hero-actions">
@@ -649,7 +666,7 @@
           </div>
 
           <div class="hero-note">
-            <strong>Важливо:</strong> слот на івент бронюється тільки через Discord. Хто не встиг — дивиться хайлайти.
+            <strong>Важливо:</strong> слот на івент бронюється лише через Discord. Хто не встиг — дивиться хайлайти.
           </div>
         </div>
 
@@ -684,7 +701,7 @@
         <div class="section-head">
           <div class="section-title">Анонси івентів Bonfire world</div>
           <div class="section-sub">
-            Пролистай картки, вибери івент, залети в Discord — і все, ти в ділі.
+            Пролистай картки, вибери івент, залети в Discord — і вже готуєшся до старту.
           </div>
         </div>
 
@@ -699,7 +716,7 @@
               <div class="news-title">Найближчий івент «Назва сценарію»</div>
               <div class="news-date">Дата: уточнюється в Discord</div>
               <div class="news-text">
-                Командний режим: бази, рейди, фінальний бій за точку.
+                Командний режим: бази, рейди, фінальний бій за контроль точки.
               </div>
               <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
                 Деталі та реєстрація →
@@ -717,7 +734,7 @@
               <div class="news-title">Івент наступного місяця</div>
               <div class="news-date">Орієнтовно: наступний місяць</div>
               <div class="news-text">
-                Новий сценарій і свій призовий фонд. Анонс першим з’явиться в Discord.
+                Новий сценарій з окремим призовим фондом. Анонс — у Discord.
               </div>
               <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
                 Підписатися на анонси →
@@ -735,7 +752,7 @@
               <div class="news-title">Попередній івент Bonfire world</div>
               <div class="news-date">Підсумки: у каналі з репортами</div>
               <div class="news-text">
-                Нікнейми переможців, скріни баз та головні моменти.
+                Нікнейми переможців, скріни баз та найжирніші моменти.
               </div>
               <a class="news-link" href="https://discord.gg/ВАШ_ІНВАЙТ" target="_blank" rel="noopener">
                 Подивитися архів →
@@ -746,7 +763,7 @@
       </div>
     </section>
 
-    <!-- HOW-TO (коротко, как у "как играть") -->
+    <!-- HOW-TO -->
     <section id="how" class="block">
       <div class="container">
         <div class="section-head">
@@ -761,7 +778,7 @@
             <div class="how-step">крок 1</div>
             <div class="how-title">Зайди в Discord</div>
             <div class="how-text">
-              Натисни кнопку «Увійти в Discord» зверху та приєднайся до Bonfire world.
+              Натисни «Увійти в Discord» зверху та приєднайся до сервера Bonfire world.
             </div>
           </div>
           <div class="how-card">
